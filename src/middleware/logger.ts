@@ -17,10 +17,11 @@ export class LoggerMiddleware implements IWebMiddleware {
       // 控制器之后执行的逻辑
       const duration = Date.now() - startTime
       // console.log(duration);
-      const req = ctx.request
-      const body = req.body
-      const query = req.query
-      ctx.logger.info(`${req.method} ${req.url} query: ${JSON.stringify(query)} body: ${JSON.stringify(body)} duration: ${duration}`)
+      // const req = ctx.request
+      // const res = ctx.response
+      // const body = req.body
+      // const query = req.query
+      ctx.logger.debug(duration)
     };
   }
 

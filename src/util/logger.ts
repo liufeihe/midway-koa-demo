@@ -19,10 +19,27 @@ export const myLog = loggers.createLogger('logger', {
                 pid: info.pid
             }
         }
-        if (info.ctx) {
-            // 请求链路
-            // console.log(info.ctx.req.rawHeaders)
-            // console.log(info.ctx.res)
+
+        // 通过链路上下文调用的，需要打印请求和返回
+        const ctx = info.ctx
+        if (ctx) {
+            const req = ctx.request
+            const res = ctx.response
+
+            obj['req'] = {
+                method: req.method,
+                path: req.url,
+                rawhd: req.header,
+                param: req.query || req.body,
+            }
+            obj['rsp'] = {
+                status: res.status,
+                code: res.code,
+                msg: res.message,
+                param: res.body,
+            }
+            obj['duration'] = info.message
+            obj['M'] = ''
         }
         if (info.stack) {
             obj['S'] = info.stack
