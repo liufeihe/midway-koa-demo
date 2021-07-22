@@ -1,6 +1,11 @@
 import { loggers, LoggerLevel } from '@midwayjs/logger';
+import { getIp } from './common'
 const moment = require('moment');
 const path = require('path');
+const os = require('os')
+
+// 缓存一下ip
+const hostIp = getIp()
 
 export const myLog = loggers.createLogger('logger', {
     dir: path.join(__dirname, '../../logs/midway-koa-demo/'),
@@ -23,13 +28,16 @@ export const myLog = loggers.createLogger('logger', {
         // 通过链路上下文调用的，需要打印请求和返回
         const ctx = info.ctx
         if (ctx && (typeof data === 'object' && data?.type==='web')) {
+            // const originalReq = ctx.req
             const req = ctx.request
+            const header = req.header
             const res = ctx.response
-
             obj['req'] = {
-                method: req.method,
                 path: req.url,
-                rawhd: req.header,
+                method: req.method,
+                ua: header['user-agent'],
+                rawhd: header,
+                ip: header['host'],
                 param: req.query || req.body,
             }
             obj['rsp'] = {
@@ -51,6 +59,11 @@ export const myLog = loggers.createLogger('logger', {
         // 打印自由字段
         if (data?.ext) {
             obj['ext'] = data.ext
+        }
+        // 打印运行环境的信息
+        obj['host'] = {
+            name: os.hostname(),
+            ip: hostIp
         }
         
         return JSON.stringify(obj).replace(/\\n/g, '') // 将换行符替换成空
