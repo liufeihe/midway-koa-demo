@@ -16,7 +16,7 @@ export class HomeController {
   async home(): Promise<string> {
     this.logger.info('info-haha2', __filename)
     this.logger.debug('debug-haha2', __filename)
-    this.ctx.logger.info('haha3')
+    // this.ctx.logger.info('haha3')
     // error('xxx-log')
     return 'Hello Midwayjs!';
   }

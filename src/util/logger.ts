@@ -1,6 +1,6 @@
-import { loggers, LoggerLevel } from '@midwayjs/logger'
-const moment = require('moment')
-const path = require('path')
+import { loggers, LoggerLevel } from '@midwayjs/logger';
+const moment = require('moment');
+const path = require('path');
 
 export const myLog = loggers.createLogger('logger', {
     dir: path.join(__dirname, '../../logs/midway-koa-demo/'),
@@ -10,7 +10,7 @@ export const myLog = loggers.createLogger('logger', {
     disableFile: true,
     disableError: true,
     printFormat: info => {
-        // console.log(info)
+        // 构造日志
         const obj = {
             T: moment(info.timestamp).toISOString(),
             L: info.level,
@@ -19,10 +19,10 @@ export const myLog = loggers.createLogger('logger', {
                 pid: info.pid
             }
         }
-
+        const data = info.originArgs[0]
         // 通过链路上下文调用的，需要打印请求和返回
         const ctx = info.ctx
-        if (ctx) {
+        if (ctx && (typeof data === 'object' && data?.type==='web')) {
             const req = ctx.request
             const res = ctx.response
 
@@ -38,11 +38,19 @@ export const myLog = loggers.createLogger('logger', {
                 msg: res.message,
                 param: res.body,
             }
-            obj['duration'] = info.message
             obj['M'] = ''
+            // 以秒为单位，传入前就应该处理好
+            if (data.duration) {
+                obj['duration'] = data.duration
+            }
         }
+        // 打印堆栈
         if (info.stack) {
             obj['S'] = info.stack
+        }
+        // 打印自由字段
+        if (data?.ext) {
+            obj['ext'] = data.ext
         }
         
         return JSON.stringify(obj).replace(/\\n/g, '') // 将换行符替换成空
