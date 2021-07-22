@@ -7,8 +7,8 @@ import { APIController } from '../controller/api';
 @Aspect(APIController)
 export class LoggerInfo implements IMethodAspect {
     async after(point: JoinPoint) {
-        const ctx = point.target.ctx
-        const req = ctx.request
-        ctx.logger.info(`${req.method} ${req.url}`)
+        // const ctx = point.target.ctx
+        // const req = ctx.request
+        // ctx.logger.info(`${req.method} ${req.url}`)
     }
 }

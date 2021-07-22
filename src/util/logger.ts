@@ -21,7 +21,7 @@ export const myLog = loggers.createLogger('logger', {
         }
         if (info.ctx) {
             // 请求链路
-            // console.log(info.ctx.req)
+            // console.log(info.ctx.req.rawHeaders)
             // console.log(info.ctx.res)
         }
         if (info.stack) {

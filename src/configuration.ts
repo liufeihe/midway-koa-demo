@@ -20,5 +20,6 @@ export class ContainerLifeCycle {
 
     // bodyparser options see https://github.com/koajs/bodyparser
     this.app.use(bodyParser());
+    this.app.use(await this.app.generateMiddleware('loggerMiddleware'));
   }
 }
