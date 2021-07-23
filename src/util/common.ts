@@ -1,4 +1,4 @@
-const os = require('os')
+import os = require('os')
 
 export function getIp() {
     // 在开发环境中获取局域网中的本机iP地址

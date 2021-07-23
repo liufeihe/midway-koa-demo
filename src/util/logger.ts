@@ -2,9 +2,9 @@ import { loggers } from '@midwayjs/logger';
 import { Provide, Autoload, Scope, ScopeEnum, Init } from '@midwayjs/decorator'
 import { getIp } from './common'
 
-const moment = require('moment');
-const path = require('path');
-const os = require('os')
+import moment = require('moment');
+import path = require('path');
+import os = require('os')
 
 // 缓存一下ip
 const hostIp = getIp()
@@ -15,7 +15,7 @@ const hostIp = getIp()
 export class CustomLogger {
     @Init()
     async init(): Promise<void> {
-        console.log('init custom logger hahaha')
+        // console.log('init custom logger hahaha')
         loggers.createLogger('custom', {
             dir: path.join(__dirname, '../../logs/midway-koa-demo/'),
             level: 'info',//
