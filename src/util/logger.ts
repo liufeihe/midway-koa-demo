@@ -1,5 +1,5 @@
 import { loggers } from '@midwayjs/logger';
-import { Provide, Autoload, Scope, ScopeEnum, Init } from '@midwayjs/decorator'
+import { Provide, Autoload, Scope, ScopeEnum, Init, Config } from '@midwayjs/decorator'
 import { getIp } from './common'
 
 import moment = require('moment');
@@ -13,16 +13,22 @@ const hostIp = getIp()
 @Autoload()
 @Scope(ScopeEnum.Singleton)
 export class CustomLogger {
+
+    @Config('logger')
+    private loggerConfig;
+
     @Init()
     async init(): Promise<void> {
-        // console.log('init custom logger hahaha')
+        const loggerConfig = this.loggerConfig
+        console.log('init custom logger hahaha', loggerConfig)
         loggers.createLogger('custom', {
             dir: path.join(__dirname, '../../logs/midway-koa-demo/'),
-            level: 'info',//
-            errorLogName: 'error.log',
-            fileLogName: 'server.log',
-            disableFile: true,//
-            disableError: true,
+            level: loggerConfig.level || 'info',
+            errorLogName: loggerConfig.errorLogName || 'error.log',
+            fileLogName: loggerConfig.fileLogName || 'server.log',
+            disableConsole: loggerConfig.disableConsole || false,
+            disableFile: loggerConfig.disableFile || false,
+            disableError: loggerConfig.disableError || false,
             printFormat: info => {
                 // 构造日志
                 const obj = {
