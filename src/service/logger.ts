@@ -1,9 +1,12 @@
-import { Provide, Config } from '@midwayjs/decorator';
-import { loggers } from '@midwayjs/logger';
+import { Provide, Config, Logger } from '@midwayjs/decorator';
+import { loggers, ILogger } from '@midwayjs/logger';
 import { LoggerLevel } from '../interface';
 
 @Provide()
 export class LoggerService {
+  @Logger('custom')
+  logger: ILogger
+
   @Config('logger')
   private loggerConfig;
 
@@ -17,8 +20,10 @@ export class LoggerService {
       if (!this.loggerConfig.disableFile) {
         loggers.updateFileLevel(level || 'info')
       }
+      throw new Error('test')
     } catch (error) {
-      loggers.getLogger('custom').error(error)
+      // loggers.getLogger('custom').error(error)
+      this.logger.error(error)
     }
   }
 }

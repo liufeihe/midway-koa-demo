@@ -19,10 +19,12 @@ export class CustomLogger {
 
     @Init()
     async init(): Promise<void> {
-        const loggerConfig = this.loggerConfig
-        console.log('init custom logger hahaha', loggerConfig)
+        const loggerConfig = this.loggerConfig;
+        console.log('init custom logger hahaha', loggerConfig);
+        const dir = path.join(__dirname, '../../logs/midway-koa-demo/');
         loggers.createLogger('custom', {
-            dir: path.join(__dirname, '../../logs/midway-koa-demo/'),
+            dir,
+            errorDir: dir,
             level: loggerConfig.level || 'info',
             errorLogName: loggerConfig.errorLogName || 'error.log',
             fileLogName: loggerConfig.fileLogName || 'server.log',
@@ -39,7 +41,8 @@ export class CustomLogger {
                         pid: info.pid
                     }
                 }
-                const data = info.originArgs[0]
+                const originArgs = info?.originArgs || []
+                const data = originArgs[0]
                 // 通过链路上下文调用的，需要打印请求和返回
                 const ctx = info.ctx
                 if (ctx && (typeof data === 'object' && data?.type==='web')) {
