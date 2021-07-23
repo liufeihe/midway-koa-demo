@@ -6,7 +6,7 @@ import { ILogger } from '@midwayjs/logger';
 @Controller('/')
 export class HomeController {
 
-  @Logger()
+  @Logger('custom')
   logger: ILogger
 
   @Inject()
@@ -15,7 +15,7 @@ export class HomeController {
   @Get('/')
   async home(): Promise<string> {
     this.logger.info('info-haha2', __filename)
-    this.logger.debug('debug-haha2', __filename)
+    this.logger.debug('debug-haha2')
     // this.ctx.logger.info('haha3')
     // error('xxx-log')
     return 'Hello Midwayjs!';
