@@ -4,6 +4,7 @@ import { ILogger } from '@midwayjs/logger';
 import { Context } from '@midwayjs/koa';
 import { UserService } from '../service/user';
 import { LoggerService } from '../service/logger'
+import { RedisService } from '../service/redis';
 
 @Provide()
 @Controller('/api')
@@ -16,6 +17,9 @@ export class APIController {
 
   @Inject()
   loggerService: LoggerService;
+
+  @Inject()
+  redisService: RedisService;
 
   @Logger('logger')
   logger: ILogger
@@ -37,6 +41,13 @@ export class APIController {
   async updateLogLevel(@Body() level) {
     // this.ctx.logger.info(`updateLogLevel ${level}`)
     this.loggerService.updateLevel(level)
+    return { success: true, message: 'OK', data: null };
+  }
+
+  @Post('/redis/pub')
+  async pub(@Body() msg) {
+    // this.ctx.logger.info(`updateLogLevel ${level}`)
+    this.redisService.sendMsg(msg)
     return { success: true, message: 'OK', data: null };
   }
 }
