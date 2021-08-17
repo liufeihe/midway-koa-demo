@@ -4,7 +4,7 @@ import { LoggerLevel } from '../interface';
 
 @Provide()
 export class LoggerService {
-  @Logger('custom')
+  @Logger('logger')
   logger: ILogger
 
   @Config('logger')

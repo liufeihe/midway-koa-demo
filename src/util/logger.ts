@@ -22,7 +22,7 @@ export class CustomLogger {
         const loggerConfig = this.loggerConfig;
         console.log('init custom logger hahaha', loggerConfig);
         const dir = path.join(__dirname, '../../logs/midway-koa-demo/');
-        loggers.createLogger('custom', {
+        const customLogOptions = {
             dir,
             errorDir: dir,
             level: loggerConfig.level || 'info',
@@ -86,7 +86,9 @@ export class CustomLogger {
                 
                 return JSON.stringify(obj).replace(/\\n/g, '') // 将换行符替换成空
             }
-        })
+        }
+        loggers.createLogger('logger', customLogOptions)
+        loggers.createLogger('coreLogger', customLogOptions)
     }
     // updateLevel(level) {
     //     // 不知道为啥, 单独设置level会报错

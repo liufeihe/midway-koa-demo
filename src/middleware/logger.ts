@@ -22,7 +22,7 @@ export class LoggerMiddleware implements IWebMiddleware {
       // const body = req.body
       // const query = req.query
       // 请求的日志使用debug级别
-      ctx.getLogger('custom').debug({
+      ctx.getLogger('logger').debug({
         type: 'web',
         duration: duration/1000,
       })

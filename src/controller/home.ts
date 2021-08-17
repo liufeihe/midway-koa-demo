@@ -6,7 +6,7 @@ import { ILogger } from '@midwayjs/logger';
 @Controller('/')
 export class HomeController {
 
-  @Logger('custom')
+  @Logger('logger')
   logger: ILogger
 
   @Inject()

@@ -17,7 +17,7 @@ export class APIController {
   @Inject()
   loggerService: LoggerService;
 
-  @Logger('custom')
+  @Logger('logger')
   logger: ILogger
 
   @Post('/get_user')
