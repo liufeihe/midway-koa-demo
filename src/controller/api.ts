@@ -45,9 +45,9 @@ export class APIController {
   }
 
   @Post('/redis/pub')
-  async pub(@Body() msg) {
+  async pub(@Body() code, @Body() version) {
     // this.ctx.logger.info(`updateLogLevel ${level}`)
-    this.redisService.sendMsg(msg)
+    await this.redisService.pubStrategy(code, version)
     return { success: true, message: 'OK', data: null };
   }
 }

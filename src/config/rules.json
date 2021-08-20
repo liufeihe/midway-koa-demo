@@ -1,0 +1,405 @@
+{
+  "rules": [
+    {
+      "rule_id": "AD-001",
+      "feature": "userAddressBaseScore",
+      "operator": "le",
+      "value": 10,
+      "remark": "用户出金地址分小于10分"
+    },
+    {
+      "rule_id": "AN-001",
+      "feature": "walletBalanceRemainingRatio",
+      "operator": "ge",
+      "value": 0.8,
+      "remark": "提币金额大于当前钱包余额80%"
+    },
+    {
+      "rule_id": "AN-002",
+      "feature": "walletBalanceRemainingRatio",
+      "operator": "eq",
+      "value": 0,
+      "remark": "提币金额占当前钱包余额为0"
+    },
+    {
+      "rule_id": "DP-001",
+      "feature": "btcTotalDepositAmount",
+      "operator": "le",
+      "value": 170000,
+      "remark": "用户BTC入金小于50美金"
+    },
+    {
+      "rule_id": "DP-002",
+      "feature": "ethTotalDepositAmount",
+      "operator": "le",
+      "value": 2800000,
+      "remark": "用户ETH入金小于50美金"
+    },
+    {
+      "rule_id": "DP-003",
+      "feature": "xrpTotalDepositAmount",
+      "operator": "le",
+      "value": 9091000000,
+      "remark": "用户XRP入金小于50美金"
+    },
+    {
+      "rule_id": "DP-004",
+      "feature": "eosTotalDepositAmount",
+      "operator": "le",
+      "value": 1515000000,
+      "remark": "用户EOS入金小于50"
+    },
+    {
+      "rule_id": "DP-005",
+      "feature": "usdtTotalDepositAmount",
+      "operator": "le",
+      "value": 5000000000,
+      "remark": "用户USDT入金小于50美金"
+    },
+    {
+      "rule_id": "WR-001",
+      "feature": "btcTotalWithdrawAmount",
+      "operator": "eq",
+      "value": 0,
+      "remark": "BTC总出金"
+    },
+    {
+      "rule_id": "WR-002",
+      "feature": "ethTotalWithdrawAmount",
+      "operator": "eq",
+      "value": 0,
+      "remark": "ETH总出金"
+    },
+    {
+      "rule_id": "WR-003",
+      "feature": "xrpTotalWithdrawAmount",
+      "operator": "eq",
+      "value": 0,
+      "remark": "xrp总出金"
+    },
+    {
+      "rule_id": "WR-004",
+      "feature": "eosTotalWithdrawAmount",
+      "operator": "eq",
+      "value": 0,
+      "remark": "eos总出金"
+    },
+    {
+      "rule_id": "WR-005",
+      "feature": "usdtTotalWithdrawAmount",
+      "operator": "eq",
+      "value": 0,
+      "remark": "usdt总出金"
+    },
+    {
+      "rule_id": "TIME-001",
+      "feature": "gaBindDayInterval",
+      "operator": "lt",
+      "value": 3,
+      "remark": "GA绑定时间至今小于3天"
+    },
+    {
+      "rule_id": "TIME-002",
+      "feature": "registerDayInterval",
+      "operator": "lt",
+      "value": 3,
+      "remark": "用户注册时间小于3天"
+    },
+    {
+      "rule_id": "TIME-003",
+      "feature": "userRegisterIpPast24hCnt",
+      "operator": "ge",
+      "value": 2,
+      "remark": "注册IP24小时内出现次数大于2次"
+    },
+    {
+      "rule_id": "TIME-004",
+      "feature": "passwdUpdateDayInterval",
+      "operator": "lt",
+      "value": 3,
+      "remark": "提币密码修改时间小于3天"
+    },
+    {
+      "rule_id": "TIME-005",
+      "feature": "addressDayInterval",
+      "operator": "le",
+      "value": 3,
+      "remark": "用户提币地址添加时间与当前时间间隔（天）小于3天"
+    },
+    {
+      "rule_id": "SEC-001",
+      "feature": "userWithdrawIpMatchHisIpRatio",
+      "operator": "le",
+      "value": 0.01,
+      "remark": "提币地址历史占比小于0.01"
+    },
+    {
+      "rule_id": "BASE-001",
+      "feature": "userAgentTag",
+      "operator": "eq",
+      "value": 0,
+      "remark": "用户无代理"
+    },
+    {
+      "rule_id": "BASE-002",
+      "feature": "mobileVerified",
+      "operator": "eq",
+      "value": 0,
+      "remark": "用户手机号码未验证"
+    },
+    {
+      "rule_id": "BASE-003",
+      "feature": "disposableEmail",
+      "operator": "eq",
+      "value": 1,
+      "remark": "用户是一次性邮箱"
+    },
+    {
+      "rule_id": "RELATED-001",
+      "feature": "invitedUserPast24hCnt",
+      "operator": "gt",
+      "value": 2,
+      "remark": "用户的邀请人下24小时内出金大于2次"
+    },
+    {
+      "rule_id": "RELATED-002",
+      "feature": "invitedUserBanRatio",
+      "operator": "ge",
+      "value": 0.1,
+      "remark": "用户的邀请人下封禁率大于10%"
+    },
+    {
+      "rule_id": "RELATED-003",
+      "feature": "relatedUserBannedRatio",
+      "operator": "ge",
+      "value": 0.1,
+      "remark": "关联用户封禁率大于10%"
+    },
+    {
+      "rule_id": "RELATED-004",
+      "feature": "relatedUserCnt",
+      "operator": "ge",
+      "value": 3,
+      "remark": "关联用户数大于3个人"
+    },
+    {
+      "rule_id": "RELATED-005",
+      "feature": "relatedUserCnt",
+      "operator": "ge",
+      "value": 5,
+      "remark": "关联用户大于等于5"
+    },
+    {
+      "rule_id": "FEE-001",
+      "feature": "xrpHistoryFee",
+      "operator": "eq",
+      "value": 0,
+      "remark": "xrp手续费等于0"
+    },
+    {
+      "rule_id": "FEE-002",
+      "feature": "eosHistoryFee",
+      "operator": "eq",
+      "value": 0,
+      "remark": "eos手续费等于0"
+    },
+    {
+      "rule_id": "FEE-003",
+      "feature": "usdtHistoryFee",
+      "operator": "eq",
+      "value": 0,
+      "remark": "usdt手续费等于0"
+    },
+    {
+      "rule_id": "FEE-004",
+      "feature": "btcHistoryFee",
+      "operator": "eq",
+      "value": 0,
+      "remark": "btc手续费等于0"
+    },
+    {
+      "rule_id": "FEE-005",
+      "feature": "ethHistoryFee",
+      "operator": "eq",
+      "value": 0,
+      "remark": "eth手续费等于0"
+    },
+    {
+      "rule_id": "BN-001",
+      "feature": "btcTotalWithholdingAmount",
+      "operator": "ne",
+      "value": 0,
+      "remark": "获取BTC体验金不为0"
+    },
+    {
+      "rule_id": "BN-002",
+      "feature": "btcTotalTrialFund",
+      "operator": "ne",
+      "value": 0,
+      "remark": "获取BTC抵扣金不为0"
+    }
+  ],
+  "strategyFlow": {
+    "strategy": {
+      "name": "出金策略",
+      "number": "fraud_check",
+      "category": "withdraw"
+    },
+    "nodes": [
+      {
+        "node_id": "node-99",
+        "node_type": "start",
+        "depends": ["BASE-001"],
+        "hit_node": "node-0",
+        "unhit_node": "node-10",
+        "tag": "用户无代理"
+      },
+      {
+        "node_id": "node-0",
+        "node_type": "relay",
+        "depends": ["AD-001"],
+        "hit_node": "node-01",
+        "unhit_node": "node-10",
+        "tag": "用户当前地址首次出金"
+      },
+      {
+        "node_id": "node-01",
+        "node_type": "relay",
+        "depends": ["AN-001"],
+        "hit_node": "node-03",
+        "unhit_node": "node-20",
+        "tag": "提币金额大于当前币种钱包余额80%"
+      },
+      {
+        "node_id": "node-03",
+        "node_type": "relay",
+        "depends": ["DP-001", "DP-002", "DP-003", "DP-004", "DP-005"],
+        "depends_logic": "and",
+        "hit_node": "node-04",
+        "unhit_node": "node-09",
+        "tag": "用户所有入金小于50美元"
+      },
+      {
+        "node_id": "node-04",
+        "node_type": "relay",
+        "depends": ["WR-001", "WR-002", "WR-003", "WR-004", "WR-005"],
+        "depends_logic": "and",
+        "hit_node": "node-05",
+        "unhit_node": "node-10",
+        "tag": "用户首次出金"
+      },
+      {
+        "node_id": "node-05",
+        "node_type": "relay",
+        "depends": ["TIME-001"],
+        "hit_node": "node-06",
+        "unhit_node": "node-07",
+        "tag": "2FA绑定时间距今小于3天"
+      },
+      {
+        "node_id": "node-06",
+        "node_type": "relay",
+        "depends": ["TIME-002"],
+        "hit_node": "node-22",
+        "unhit_node": "node-08",
+        "tag": "用户注册时间小于3天"
+      },
+      {
+        "node_id": "node-07",
+        "node_type": "relay",
+        "depends": ["TIME-002"],
+        "hit_node": "node-08",
+        "unhit_node": "node-10",
+        "tag": "用户注册时间小于3天"
+      },
+      {
+        "node_id": "node-08",
+        "node_type": "relay",
+        "depends": ["TIME-005"],
+        "hit_node": "node-22",
+        "unhit_node": "node-10",
+        "tag": "提币地址添加时间距今小于3天"
+      },
+      {
+        "node_id": "node-09",
+        "node_type": "relay",
+        "depends": ["FEE-001", "FEE-002", "FEE-003", "FEE-004", "FEE-005"],
+        "depends_logic": "and",
+        "hit_node": "decision-04",
+        "unhit_node": "node-10",
+        "tag": "用户无手续费贡献"
+      },
+      {
+        "node_id": "node-20",
+        "node_type": "relay",
+        "depends": ["AN-002"],
+        "hit_node": "node-21",
+        "unhit_node": "node-10",
+        "tag": "用户提币金额占钱包余额比例为0"
+      },
+      {
+        "node_id": "node-21",
+        "node_type": "relay",
+        "depends": ["BN-001", "BN-002", "RELATED-005"],
+        "depends_logic": "or",
+        "hit_node": "node-03",
+        "unhit_node": "node-10",
+        "tag": "获取体验金或者抵扣金或者关联用户大于等于5"
+      },
+      {
+        "node_id": "node-22",
+        "node_type": "relay",
+        "depends": ["BASE-002"],
+        "hit_node": "decision-01",
+        "unhit_node": "node-10",
+        "tag": "用户未认证手机号"
+      },
+      {
+        "node_id": "node-10",
+        "node_type": "end",
+        "depends": ["SEC-001"],
+        "hit_node": "decision-02",
+        "unhit_node": "decision-03",
+        "tag": "用户提币IP不在常用区域"
+      }
+    ],
+    "decisions": [
+      {
+        "did": "decision-01",
+        "name": "可能羊毛",
+        "event": {
+          "atype": "mr",
+          "direction": "withdrawId",
+          "label": "可能羊毛"
+        }
+      },
+      {
+        "did": "decision-02",
+        "name": "提币地址不在常用IP范围内",
+        "event": {
+          "atype": "pass",
+          "direction": "withdrawId",
+          "label": "提币地址不在常用IP范围内"
+        }
+      },
+      {
+        "did": "decision-03",
+        "name": "检测完成",
+        "event": {
+          "atype": "pass",
+          "direction": "withdrawId",
+          "label": "检测完成"
+        }
+      },
+      {
+        "did": "decision-04",
+        "name": "可能洗钱",
+        "event": {
+          "atype": "pass",
+          "direction": "withdrawId",
+          "label": "可能洗钱"
+        }
+      }
+    ]
+  }
+}
