@@ -19,7 +19,7 @@ export class RedisService {
 	
   @Init()
   async init() {
-    this.sgMap = {};
+    
     // console.log('redis', this.config)
   	this.redisService = new Redis(this.config);
   	this.redisPub = new Redis(this.config);
@@ -35,6 +35,8 @@ export class RedisService {
     this.redisSub.on("error", function (err) {
         console.log("loggerChannel response err:" + err)
     });
+
+    this.sgMap = JSON.parse(await this.getValue('sgMap'));
   }
   
   getRedisClient() {
@@ -55,16 +57,18 @@ export class RedisService {
     this.redisPub.publish('demoChannel2', msg)
   }
 
-  async pubStrategy(code:string, version: number) {
-    const filePath = path.join(__dirname, '../config/rules.json');
-    const ruleJson = JSON.parse(fs.readFileSync(filePath).toString());
-    const strategyFlow = ruleJson?.strategyFlow || {};
-    strategyFlow.strategy['version'] = version || 1;
+  async pubStrategy(code?: string, version?: number) {
+    if (code) {
+      const filePath = path.join(__dirname, '../config/rules.json');
+      const ruleJson = JSON.parse(fs.readFileSync(filePath).toString());
+      const strategyFlow = ruleJson?.strategyFlow || {};
+      strategyFlow.strategy['version'] = version || 1;
+      this.sgMap[code] = ruleJson;
+      console.log('sgMap', this.sgMap);
+      const sgMapStr = JSON.stringify(this.sgMap)
+      await this.setValue('sgMap', sgMapStr)
+    }
     
-    this.sgMap[code] = ruleJson;
-    console.log('sgMap', this.sgMap);
-    const sgMapStr = JSON.stringify(this.sgMap)
-    await this.setValue('sgMap', sgMapStr)
-    this.redisPub.publish('event_update_sgEngineMap', '1')
+    this.redisPub.publish('event_update_sgEngineMap', {code})
   }
 }
