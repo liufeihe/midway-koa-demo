@@ -36,7 +36,7 @@ export class RedisService {
         console.log("loggerChannel response err:" + err)
     });
 
-    this.sgMap = JSON.parse(await this.getValue('sgMap'));
+    this.sgMap = JSON.parse(await this.getValue('sgMap')) || {};
   }
   
   getRedisClient() {
@@ -61,14 +61,16 @@ export class RedisService {
     if (code) {
       const filePath = path.join(__dirname, '../config/rules.json');
       const ruleJson = JSON.parse(fs.readFileSync(filePath).toString());
-      const strategyFlow = ruleJson?.strategyFlow || {};
-      strategyFlow.strategy['version'] = version || 1;
-      this.sgMap[code] = ruleJson;
+      this.sgMap[code] = {
+        code,
+        version,
+        status: 1,
+        strategies: [ruleJson],
+      };
       console.log('sgMap', this.sgMap);
       const sgMapStr = JSON.stringify(this.sgMap)
       await this.setValue('sgMap', sgMapStr)
     }
-    
-    this.redisPub.publish('event_update_sgEngineMap', {code})
+    this.redisPub.publish('event_update_sgEngineMap', JSON.stringify({code}))
   }
 }
