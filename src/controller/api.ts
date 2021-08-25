@@ -5,6 +5,7 @@ import { Context } from '@midwayjs/koa';
 import { UserService } from '../service/user';
 import { LoggerService } from '../service/logger'
 import { RedisService } from '../service/redis';
+// import { CreateApiDoc } from '@midwayjs/swagger'
 
 @Provide()
 @Controller('/api')
@@ -23,6 +24,11 @@ export class APIController {
 
   @Logger('logger')
   logger: ILogger
+
+  // @CreateApiDoc()
+  // .summary('get user')
+  // .description('This is a open api for get user')
+  // .build()
 
   @Post('/get_user')
   async getUser(@Query() uid) {

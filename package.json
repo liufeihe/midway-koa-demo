@@ -8,9 +8,11 @@
     "@midwayjs/core": "^2.3.0",
     "@midwayjs/decorator": "^2.3.0",
     "@midwayjs/koa": "^2.3.0",
+    "@midwayjs/swagger": "^1.0.7",
     "ioredis": "^4.27.7",
     "koa-bodyparser": "^4.3.0",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "swagger-ui-dist": "^4.0.0-beta.4"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",
