@@ -9,17 +9,16 @@ import * as swagger from '@midwayjs/swagger';
   imports: [
     {
       component: swagger,
-      enabledEnvironment: ['local']
-    }
+      enabledEnvironment: ['local'],
+    },
   ],
-  importConfigs: [join(__dirname, './config/'),],
+  importConfigs: [join(__dirname, './config/')],
 })
 export class ContainerLifeCycle {
   @App()
   app: Application;
 
   async onReady() {
-
     // // 基于框架的默认日志创建自己的日志，使用的时候获取custom就行
     // this.app.createLogger('logger', {
     //   level: 'info',
